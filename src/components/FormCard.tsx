@@ -1,8 +1,13 @@
-import type { SavedForm } from "../types/form"
-import { formatDate } from "../utils/formatDate"
+import type { SavedForm } from "../types/form";
+import { formatDate } from "../utils/formatDate";
 
 type FormCardProps = {
   form: SavedForm;
+};
+
+const statusLabels: Record<SavedForm["status"], string> = {
+  draft: "Draft",
+  published: "Published",
 };
 
 function FormCard({ form }: FormCardProps) {
@@ -11,7 +16,7 @@ function FormCard({ form }: FormCardProps) {
       <h3>{form.title}</h3>
       <dl>
         <dt>Status</dt>
-        <dd>{form.status === "published" ? "Published" : "Draft"}</dd>
+        <dd>{statusLabels[form.status]}</dd>
         <dt>Created</dt>
         <dd>
           <time dateTime={form.createdAt}>{formatDate(form.createdAt)}</time>

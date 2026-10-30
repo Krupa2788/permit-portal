@@ -1,14 +1,16 @@
 import type { SavedForm } from "../types/form";
 import FormCard from "./FormCard";
+import { useId } from "react";
 
 type FormListProps = {
   forms: SavedForm[];
 };
 
 function FormList({ forms }: FormListProps) {
+  const headingId = useId();
   return (
-    <section aria-labelledby="forms-heading">
-      <h2 id="forms-heading">Your forms</h2>
+    <section aria-labelledby={headingId}>
+      <h2 id={headingId}>Your forms</h2>
       {forms.length === 0 ? (
         <p>No forms yet.</p>
       ) : (

@@ -1,6 +1,6 @@
-import './App.css'
-import FormList from './components/FormList'
-import { mockForms } from './data/mockForms'
+import "./App.css";
+import FormList from "./components/FormList";
+import { mockForms } from "./data/mockForms";
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <h1>Permit Portal</h1>
       <FormList forms={mockForms} />
     </main>
-  )
+  );
 }
 
-export default App
+export default App;
