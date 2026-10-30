@@ -5,3 +5,5 @@ export type SavedForm = {
   createdAt: string;
   status: "draft" | "published";
 };
+
+export type StatusFilterValue = "all" | SavedForm["status"];

@@ -62,3 +62,9 @@
 - Why: reuses the Vite config and TypeScript/ESM setup with no extra transform; Jest-compatible API; explicit imports match D-006 and need no tsconfig `types`.
 - Scope for now: Node environment for pure functions. Add jsdom + Testing Library when component tests are needed.
 - Alternative: Jest (needs separate TS/ESM config, duplicates what Vite already does).
+
+## D-009: Scope for v1 (3 days)
+
+- Decision: localStorage persistence behind a storage module; no backend, no auth.
+- Why: focus on React fundamentals; storage module makes API swap a one-file change.
+- Deferred to v2: Node API, TanStack Query, Zustand, auth.
