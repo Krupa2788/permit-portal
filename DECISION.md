@@ -47,3 +47,11 @@
 - Why: the import name must match the export, so search and rename-symbol find every use; typos fail at compile time; editors auto-import reliably.
 - Exceptions: tool config files that require a default export (`vite.config.ts`, `eslint.config.js`). For `React.lazy`, map the named export: `lazy(() => import("./X").then((m) => ({ default: m.X })))`.
 - Alternatives: default exports (Vite template style; any import name is accepted, so names drift across files).
+
+## D-007: Dates display in Australia/Brisbane time
+
+- Decision: All dates formatted with Intl, timeZone Australia/Brisbane, en-AU, dateStyle long.
+- Why: permit dates are legal Queensland dates; consistent for every viewer; no DST.
+- Alternative: user's local zone (right for global apps, wrong for jurisdictional deadlines).
+- Invalid dates: `parseDate` returns `null` and warns; the component shows "Unknown date" as plain text (no `<time>`), so one bad record doesn't crash the list.
+- Alternative: throw and catch with an Error Boundary (louder, but more machinery for a display-only value).
