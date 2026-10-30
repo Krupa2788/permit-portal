@@ -5,5 +5,9 @@ const brisbaneDate = new Intl.DateTimeFormat("en-AU", {
 });
 
 export function formatDate(iso: string): string {
-  return brisbaneDate.format(new Date(iso));
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) {
+    return "Unknown date";
+  }
+  return brisbaneDate.format(date);
 }
