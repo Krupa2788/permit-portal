@@ -38,3 +38,12 @@
 - Decision: Prettier as a pinned devDependency with default options (`.prettierrc` is `{}`); `npm run format` / `npm run format:check`; VS Code formats on save using the project's Prettier.
 - Why: one formatter for editor, CLI and anyone else on the repo; ends mixed tabs/spaces and semicolons. Defaults already match most of the code (2 spaces, double quotes, semicolons).
 - Alternatives: ESLint stylistic rules (slower, more config); no formatter (style drifts, noisy diffs). eslint-config-prettier not needed: the Vite ESLint config has no formatting rules.
+
+## D-006: Exports – named, not default
+
+- Date: 2026-10-30
+- Status: Accepted
+- Decision: modules use named exports (`export function FormCard`); no `export default` in `src/`.
+- Why: the import name must match the export, so search and rename-symbol find every use; typos fail at compile time; editors auto-import reliably.
+- Exceptions: tool config files that require a default export (`vite.config.ts`, `eslint.config.js`). For `React.lazy`, map the named export: `lazy(() => import("./X").then((m) => ({ default: m.X })))`.
+- Alternatives: default exports (Vite template style; any import name is accepted, so names drift across files).

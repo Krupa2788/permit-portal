@@ -10,7 +10,7 @@ const statusLabels: Record<SavedForm["status"], string> = {
   published: "Published",
 };
 
-function FormCard({ form }: FormCardProps) {
+export function FormCard({ form }: FormCardProps) {
   return (
     <article className="form-card">
       <h3>{form.title}</h3>
@@ -25,5 +25,3 @@ function FormCard({ form }: FormCardProps) {
     </article>
   );
 }
-
-export default FormCard;

@@ -1,8 +1,8 @@
 import "./App.css";
-import FormList from "./components/FormList";
+import { FormList } from "./components/FormList";
 import { mockForms } from "./data/mockForms";
 
-function App() {
+export function App() {
   return (
     <main>
       <h1>Permit Portal</h1>
@@ -10,5 +10,3 @@ function App() {
     </main>
   );
 }
-
-export default App;

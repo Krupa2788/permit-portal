@@ -1,12 +1,12 @@
 import type { SavedForm } from "../types/form";
-import FormCard from "./FormCard";
+import { FormCard } from "./FormCard";
 import { useId } from "react";
 
 type FormListProps = {
   forms: SavedForm[];
 };
 
-function FormList({ forms }: FormListProps) {
+export function FormList({ forms }: FormListProps) {
   const headingId = useId();
   return (
     <section aria-labelledby={headingId}>
@@ -25,5 +25,3 @@ function FormList({ forms }: FormListProps) {
     </section>
   );
 }
-
-export default FormList;
