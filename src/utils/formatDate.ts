@@ -4,10 +4,15 @@ const brisbaneDate = new Intl.DateTimeFormat("en-AU", {
   dateStyle: "long",
 });
 
-export function formatDate(iso: string): string {
+export function parseDate(iso: string): Date | null {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) {
-    return "Unknown date";
+    console.warn(`Invalid date: ${iso}`);
+    return null;
   }
+  return date;
+}
+
+export function formatDate(date: Date): string {
   return brisbaneDate.format(date);
 }
