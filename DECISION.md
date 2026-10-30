@@ -55,3 +55,10 @@
 - Alternative: user's local zone (right for global apps, wrong for jurisdictional deadlines).
 - Invalid dates: `parseDate` returns `null` and warns; the component shows "Unknown date" as plain text (no `<time>`), so one bad record doesn't crash the list.
 - Alternative: throw and catch with an Error Boundary (louder, but more machinery for a display-only value).
+
+## D-008: Testing – Vitest
+
+- Decision: Vitest for unit tests, test files next to source (`*.test.ts`), explicit imports from `vitest` (no globals).
+- Why: reuses the Vite config and TypeScript/ESM setup with no extra transform; Jest-compatible API; explicit imports match D-006 and need no tsconfig `types`.
+- Scope for now: Node environment for pure functions. Add jsdom + Testing Library when component tests are needed.
+- Alternative: Jest (needs separate TS/ESM config, duplicates what Vite already does).
