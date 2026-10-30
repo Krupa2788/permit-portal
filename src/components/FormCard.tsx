@@ -1,5 +1,5 @@
-import type { SavedForm } from "../types/form"
-import { formatDate } from "../utils/formatDate"
+import type { SavedForm } from "../types/form";
+import { formatDate } from "../utils/formatDate";
 
 type FormCardProps = {
   form: SavedForm;

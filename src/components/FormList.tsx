@@ -7,7 +7,7 @@ type FormListProps = {
 };
 
 function FormList({ forms }: FormListProps) {
-     const headingId = useId();
+  const headingId = useId();
   return (
     <section aria-labelledby={headingId}>
       <h2 id={headingId}>Your forms</h2>
