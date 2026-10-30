@@ -19,3 +19,10 @@
 - Decision: TypeScript (Vite react-ts template).
 - Why: typed props catch wrong or missing props at the call site; shared types (e.g. SavedForm) keep data, mocks and components in sync.
 - Alternatives: JavaScript (less setup, but no prop checking without PropTypes).
+
+## D-004: Form status labels – Record keyed by the status union
+- Date: 2026-10-30
+- Status: Accepted
+- Decision: map labels with `Record<SavedForm["status"], string>`; the union in `SavedForm` stays the single source of truth.
+- Why: `Record` requires every key, so adding a status fails the build until it has a label; the old ternary silently fell back to "Draft".
+- Alternatives: `as const` array + derived union (also gives a runtime list for e.g. a filter dropdown; not needed yet); TS `enum` (not allowed: tsconfig sets `erasableSyntaxOnly`).
