@@ -1,33 +1,33 @@
-import { useState } from "react";
+import { Route, Routes, NavLink } from "react-router";
 import "./App.css";
-import { FormList } from "./components/FormList";
-import { StatusFilter } from "./components/StatusFilter";
-import { mockForms } from "./data/mockForms";
-import type { StatusFilterValue } from "./types/form";
+import { BuilderPage } from "./pages/BuilderPage";
+import { FillFormPage } from "./pages/FillFormPage";
+import { FormsPage } from "./pages/FormsPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 export function App() {
-  const [statusFilter, setStatusFilter] = useState<StatusFilterValue>("all");
-
-  // Derived from state on every render, not stored separately.
-  const visibleForms =
-    statusFilter === "all"
-      ? mockForms
-      : mockForms.filter((form) => form.status === statusFilter);
-
   return (
-    <main>
-      <h1>Permit Portal</h1>
-      <StatusFilter value={statusFilter} onChange={setStatusFilter} />
-      {/* Always rendered so screen readers announce when its text changes. */}
-      <p role="status">
-        Showing {visibleForms.length} of {mockForms.length} forms
-      </p>
-      <FormList
-        forms={visibleForms}
-        emptyMessage={
-          statusFilter === "all" ? undefined : `No ${statusFilter} forms.`
-        }
-      />
-    </main>
+    <>
+      <header>
+        <nav aria-label="Main">
+          <ul className="main-nav">
+            <li>
+              <NavLink to="/">Forms</NavLink>
+            </li>
+            <li>
+              <NavLink to="/builder">Builder</NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <Routes>
+          <Route path="/" element={<FormsPage />} />
+          <Route path="/builder" element={<BuilderPage />} />
+          <Route path="/forms/:formId" element={<FillFormPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+    </>
   );
 }

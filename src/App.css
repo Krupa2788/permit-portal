@@ -262,3 +262,27 @@
     }
   }
 }
+
+.main-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+
+  a {
+    color: var(--text-h);
+
+    &:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* NavLink sets aria-current="page" on the active route. */
+    &[aria-current="page"] {
+      font-weight: 600;
+      text-decoration-thickness: 2px;
+    }
+  }
+}
