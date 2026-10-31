@@ -99,3 +99,11 @@
 - Decision: `parseDate` returns `null` and warns; the component shows "Unknown date" as plain text (no `<time>`).
 - Why: one bad record doesn't crash the list. Split out of D-007.
 - Alternative: throw and catch with an Error Boundary (louder, but more machinery for a display-only value).
+
+## D-013: Routing – React Router, declarative mode
+
+- Date: 2026-10-31
+- Status: Accepted
+- Decision: `react-router` with `<BrowserRouter>` and `<Routes>`/`<Route>`; one component per route in `src/pages/`.
+- Why: standard React routing library; declarative mode is the smallest change from a single-page `App` and needs no loaders while data is local (D-009).
+- Alternatives: data mode (`createBrowserRouter` + loaders; worth it once data comes from an API); framework mode (adds server rendering and file-based routes, more than v1 needs).

@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { SavedForm } from "../types/form";
 import { formatDate, parseDate } from "../utils/formatDate";
 
@@ -15,7 +16,9 @@ export function FormCard({ form }: FormCardProps) {
 
   return (
     <article className="form-card">
-      <h3>{form.title}</h3>
+      <h3>
+        <Link to={`/forms/${form.id}`}>{form.title}</Link>
+      </h3>
       <dl>
         <dt>Status</dt>
         <dd>{statusLabels[form.status]}</dd>
