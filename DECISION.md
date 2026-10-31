@@ -107,3 +107,20 @@
 - Decision: `react-router` with `<BrowserRouter>` and `<Routes>`/`<Route>`; one component per route in `src/pages/`.
 - Why: standard React routing library; declarative mode is the smallest change from a single-page `App` and needs no loaders while data is local (D-009).
 - Alternatives: data mode (`createBrowserRouter` + loaders; worth it once data comes from an API); framework mode (adds server rendering and file-based routes, more than v1 needs).
+
+## D-014: Storage module – localStorage, async API
+
+- Date: 2026-10-31
+- Status: Accepted
+- Decision: `src/lib/storage.ts` is the only code that touches `localStorage`. One key per collection (`permit-portal:forms`, `permit-portal:submissions`); every function returns a `Promise`; new ids come from `crypto.randomUUID()`.
+- Why: async signatures match a future HTTP API, so the swap in D-009 changes one file, not its callers. Unreadable data falls back to an empty list instead of crashing the app (same approach as D-012).
+- Seeding: if the forms key is missing, the mock forms are saved. A key that exists but is empty or corrupt is not reseeded, so a user's data is never overwritten.
+- Alternatives: one key for all data (every write rewrites everything); IndexedDB (async and larger, but much more code than v1 needs).
+
+## D-015: Data loading through custom hooks
+
+- Date: 2026-10-31
+- Status: Accepted
+- Decision: pages load data with `useForms()` / `useForm(id)` in `src/hooks/`; pages never call `storage` directly. Hooks return `null` while loading and `undefined` for not found.
+- Why: loading, race handling and stale-result fixes live in one place; swapping to TanStack Query later (D-009) changes the hooks, not the pages.
+- Alternatives: `useEffect` in each page (duplicated, fixes applied per page); an `AsyncState` union with an error state (deferred until loading can fail, i.e. the API).

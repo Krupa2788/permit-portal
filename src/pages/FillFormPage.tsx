@@ -1,17 +1,25 @@
 import { Link, useParams } from "react-router";
-import { mockForms } from "../data/mockForms";
+import { useForm } from "../hooks/useForms";
 
 export function FillFormPage() {
   const { formId } = useParams();
-  const form = mockForms.find((f) => f.id === formId);
+  const form = useForm(formId);
 
-  if (!form) {
+  if (form === undefined) {
     return (
       <>
         <h1>Form not found</h1>
         <p>
           <Link to="/">Back to all forms</Link>
         </p>
+      </>
+    );
+  }
+
+  if (form === null) {
+    return (
+      <>
+        <h1>Loading…</h1>
       </>
     );
   }
